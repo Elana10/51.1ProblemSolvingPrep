@@ -1,0 +1,37 @@
+function sameFrequency(int1, int2) {
+  const numMap1 = freqMapping(int1.toString())
+  const numMap2 = freqMapping(int2.toString())
+
+  if(numMap1.size !== numMap2.size) return false;
+
+  for(let num of numMap1.keys()){
+      if( numMap2.get(num) !== numMap1.get(num)) return false;
+  }
+  return true;
+}
+
+
+function freqMapping(str){
+  const freqMap = new Map();
+
+  for (let n of str){
+      let valCount = freqMap.get(n) || 0;
+      freqMap.set(n, valCount +1)
+  }
+  return freqMap;
+}
+
+
+
+describe("sameFrequency", function() {
+  it("should return true if the frequencies are the same", function() {
+    expect(sameFrequency(182, 281)).toBe(true);
+    expect(sameFrequency(3589578, 5879385)).toBe(true);
+  });
+
+  it("should return false if the frequencies are not the same", function() {
+    expect(sameFrequency(22, 222)).toBe(false);    
+    expect(sameFrequency(34, 14)).toBe(false);
+    expect(sameFrequency(22, 222)).toBe(false);
+  });
+});
